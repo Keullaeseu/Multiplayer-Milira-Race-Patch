@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+	<name>Multiplayer Milira Race Patch</name>
+	<author>Keullaeseu</author>
+	<packageId>keullaeseu.mp.Ancot.MiliraRace</packageId>
+	<modVersion>1.0.0.0</modVersion>
+	<url>https://github.com/Keullaeseu/Multiplayer-Milira-Race-Patch</url>
+	<description>Provides multiplayer support for the Milira Race mod by Ancot.</description>
+
+	<supportedVersions>
+		<li>1.6</li>
+	</supportedVersions>
+
+	<loadAfter>
+		<li>rwmt.Multiplayer</li>
+		<li>Ancot.AncotLibrary</li>
+		<li>keullaeseu.mp.Ancot.AncotLibrary</li>
+		<li>erdelf.HumanoidAlienRaces</li>
+		<li>keullaeseu.mp.erdelf.HumanoidAlienRaces</li>
+		<li>Ancot.MiliraRace</li>		
+	</loadAfter>
+
+	<modDependencies>
+		<li>
+			<packageId>rwmt.Multiplayer</packageId>
+			<displayName>Multiplayer</displayName>
+			<steamWorkshopUrl>steam://url/CommunityFilePage/2606448745</steamWorkshopUrl>
+			<downloadUrl>https://github.com/rwmt/Multiplayer/releases/latest</downloadUrl>
+		</li>
+		<li>
+			<packageId>Ancot.AncotLibrary</packageId>
+			<displayName>Ancot Library</displayName>
+			<steamWorkshopUrl>steam://url/CommunityFilePage/2988801276</steamWorkshopUrl>
+		</li>
+		<li>
+			<packageId>keullaeseu.mp.Ancot.AncotLibrary</packageId>
+			<displayName>Multiplayer Ancot Library Patch</displayName>
+			<downloadUrl>https://github.com/Keullaeseu/Multiplayer-Ancot-Library-Patch/releases/latest</downloadUrl>
+		</li>
+		<li>
+			<packageId>erdelf.HumanoidAlienRaces</packageId>
+			<displayName>Humanoid Alien Races</displayName>
+			<steamWorkshopUrl>steam://url/CommunityFilePage/839005762</steamWorkshopUrl>
+		</li>
+		<li>
+			<packageId>keullaeseu.mp.erdelf.HumanoidAlienRaces</packageId>
+			<displayName>Multiplayer Humanoid Alien Races Patch</displayName>
+			<downloadUrl>https://github.com/Keullaeseu/Multiplayer-Humanoid-Alien-Races-Patch/releases/latest</downloadUrl>
+		</li>
+		<li>
+			<packageId>Ancot.MiliraRace</packageId>
+			<displayName>Milira Race</displayName>
+			<steamWorkshopUrl>steam://url/CommunityFilePage/3256974620</steamWorkshopUrl>
+		</li>
+	</modDependencies>
+</ModMetaData>
