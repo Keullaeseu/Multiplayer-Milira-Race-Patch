@@ -28,8 +28,6 @@ public class MiliraRacePatch
         MiliraRaceHair.Patch();
         MiliraRaceJobs.Patch();
 
-        Log.Message(
-            $"{LogPrefix} Reminder: keep Milira Race mod settings identical on all clients (Story, Cluster, TirelessFly, Difficulty, Promotion). MP cannot live-sync settings.");
         Log.Message($"{LogPrefix} Initialized.");
     }
 }
