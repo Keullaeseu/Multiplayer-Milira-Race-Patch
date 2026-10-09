@@ -31,7 +31,8 @@ internal static class MiliraRaceLambdaSync
         string parentMethodName,
         string[] stateFieldNames,
         string[] stateMethodNames,
-        SyncContext? context = null)
+        SyncContext? context = null,
+        bool debugOnly = false)
     {
         var parentType = AccessTools.TypeByName(typeName);
 
@@ -44,10 +45,10 @@ internal static class MiliraRaceLambdaSync
         var synced = 0;
         var prefix = $"<{parentMethodName}>b__";
 
-        synced += SyncMatching(parentType, parentType, prefix, stateFieldNames, stateMethodNames, context);
+        synced += SyncMatching(parentType, parentType, prefix, stateFieldNames, stateMethodNames, context, debugOnly);
 
         foreach (var nested in AllNestedTypes(parentType))
-            synced += SyncMatching(parentType, nested, prefix, stateFieldNames, stateMethodNames, context);
+            synced += SyncMatching(parentType, nested, prefix, stateFieldNames, stateMethodNames, context, debugOnly);
 
         if (synced == 0)
             Log.Warning($"{LogPrefix} No state-changing lambdas found in {typeName}.{parentMethodName}.");
@@ -61,7 +62,8 @@ internal static class MiliraRaceLambdaSync
         string prefix,
         string[] stateFieldNames,
         string[] stateMethodNames,
-        SyncContext? context)
+        SyncContext? context,
+        bool debugOnly)
     {
         List<MethodInfo> methods;
 
@@ -100,6 +102,8 @@ internal static class MiliraRaceLambdaSync
 
                     if (context.HasValue)
                         sync.SetContext(context.Value);
+                    if (debugOnly)
+                        sync.SetDebugOnly();
                 }
                 else
                 {
@@ -107,6 +111,8 @@ internal static class MiliraRaceLambdaSync
 
                     if (context.HasValue)
                         sync.SetContext(context.Value);
+                    if (debugOnly)
+                        sync.SetDebugOnly();
                 }
 
                 synced++;

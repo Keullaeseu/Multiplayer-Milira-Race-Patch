@@ -26,6 +26,7 @@ public static class MiliraRaceGizmos
 
         PatchFlightControl();
         PatchSwitchResonate();
+        PatchDevGizmos();
 
         Log.Message($"{LogPrefix} Initialized.");
     }
@@ -67,6 +68,45 @@ public static class MiliraRaceGizmos
         catch (Exception exception)
         {
             Log.Warning($"{LogPrefix} Could not sync SetClassHediffToInitial: {exception.Message}");
+        }
+    }
+
+    private static void PatchDevGizmos()
+    {
+        // DEV: Spawn Milira Feather - resets countdown (Rand) and spawns the item.
+        // Debug-only like vanilla dev gizmos: hidden unless god/dev mode is on.
+        MiliraRaceLambdaSync.SyncStateChangingLambdas(
+            "Milira.CompSpawner_MiliraFeather",
+            "CompGetGizmosExtra",
+            [],
+            ["ResetCountdown", "TryDoSpawn"],
+            debugOnly: true);
+
+        // DEV: Spawn (delayed pawn wakeup) - the gizmo calls named Spawn() directly.
+        try
+        {
+            var type = AccessTools.TypeByName("Milira.CompDelayedPawnSpawnOnWakeup");
+
+            if (type == null)
+            {
+                Log.Warning($"{LogPrefix} Type not found: Milira.CompDelayedPawnSpawnOnWakeup.");
+                return;
+            }
+
+            var method = AccessTools.DeclaredMethod(type, "Spawn");
+
+            if (method == null)
+            {
+                Log.Warning($"{LogPrefix} Could not find Milira.CompDelayedPawnSpawnOnWakeup.Spawn.");
+                return;
+            }
+
+            MP.RegisterSyncMethod(method).SetDebugOnly();
+            Log.Message($"{LogPrefix} Synced Milira.CompDelayedPawnSpawnOnWakeup.Spawn.");
+        }
+        catch (Exception exception)
+        {
+            Log.Warning($"{LogPrefix} Could not sync delayed pawn Spawn: {exception.Message}");
         }
     }
 }
